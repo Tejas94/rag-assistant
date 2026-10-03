@@ -1,0 +1,39 @@
+{
+  "name": "rag-assistant",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down",
+    "db:reset": "docker compose down -v && docker compose up -d",
+    "ingest": "tsx --env-file=.env src/ingest.ts",
+    "ask": "tsx --env-file=.env src/ask.ts",
+    "dev": "tsx watch --env-file=.env src/server.ts",
+    "eval": "tsx --env-file=.env evals/run.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:core": "vitest run tests/core",
+    "test:specs": "vitest run tests/specs",
+    "test:watch": "vitest",
+    "todos": "grep -rn \"TODO(P2-\" src evals corpus/README.md | sort",
+    "progress": "node scripts/progress.mjs"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.131.0",
+    "@hono/node-server": "^2.1.3",
+    "hono": "^4.13.12",
+    "pg": "^8.23.1",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.4",
+    "@types/pg": "^8.23.1",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.3"
+  }
+}

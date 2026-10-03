@@ -1,0 +1,16 @@
+# Fixed project name, so the volume is always "rag-assistant_ragdata" whatever the folder is called.
+name: rag-assistant
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    environment:
+      POSTGRES_USER: rag
+      POSTGRES_PASSWORD: rag
+      POSTGRES_DB: rag
+    ports:
+      - "5433:5432"
+    volumes:
+      - ragdata:/var/lib/postgresql/data
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/001-schema.sql:ro
+volumes:
+  ragdata:
