@@ -1,0 +1,6 @@
+{"id":"q01","question":"How long are daily backups kept on the Team plan?","answer":"30 days.","sourceDocs":["backups.md"]}
+{"id":"q02","question":"Can I get my money back on a monthly plan?","answer":"No. Monthly plans are not refundable, but you can cancel any time and keep access until the end of the billing period.","sourceDocs":["billing.md"]}
+{"id":"q03","question":"Which regions keep data inside the UK?","answer":"lon-1 (London) and man-1 (Manchester), with the UK residency lock enabled.","sourceDocs":["regions.md"]}
+{"id":"q04","question":"What does nw keys rotate do to the old key?","answer":"The old key stays valid for 24 hours after rotation.","sourceDocs":["security.md"]}
+{"id":"q05","question":"How fast does Enterprise support respond when production is completely down?","answer":"Within 30 minutes, by phone, 24/7 (severity 1).","sourceDocs":["support.md"]}
+{"id":"q06","question":"Does Northwind Cloud offer GPU instances?","answer":"UNANSWERABLE","sourceDocs":[]}
