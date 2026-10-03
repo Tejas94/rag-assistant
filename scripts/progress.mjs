@@ -5,8 +5,8 @@
  *   npm run progress                which TODOs are still open (reads the code)
  *   npm run progress -- --specs     also runs tests/specs and shows which pass
  *
- * A TODO counts as done when its TODO(P2-nn) marker is gone from src/, evals/ and corpus/,
- * so delete the marker comment when you finish one. CI runs this with --specs on
+ * A TODO counts as done when its TODO(P2-nn) marker is gone from src/ and evals/, so
+ * delete the marker comment when you finish one. CI runs this with --specs on
  * every push and shows the table in the run's summary.
  */
 import { execFileSync } from "node:child_process";
@@ -14,20 +14,20 @@ import { existsSync, readdirSync, readFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 
-const PROJECT = "Project 2: RAG docs assistant with evals (weeks 4-6)";
-const SCAN_DIRS = ["src", "evals", "corpus"];
+const PROJECT = "Project 2: Developer Docs Assistant, RAG over the Next.js docs with evals (weeks 4-6)";
+const SCAN_DIRS = ["src", "evals"];
 /** In the suggested order. `spec` is the test file that checks it, if any. */
 const TODOS = [
-  { id: "P2-01", week: 4, what: "Heading-aware chunking with size limit and overlap", spec: "chunk.test.ts" },
-  { id: "P2-03", week: 4, what: "Vector search with pgvector", check: "npm run eval (vector row)" },
-  { id: "P2-08", week: 4, what: "recall@k and reciprocal rank", spec: "metrics.test.ts" },
-  { id: "P2-02", week: 4, what: "Real embeddings with batching and retries", check: "npm run eval with EMBEDDER=voyage" },
-  { id: "P2-04", week: 5, what: "Keyword search with Postgres full-text search", check: "npm run eval (keyword row)" },
-  { id: "P2-05", week: 5, what: "Reciprocal Rank Fusion for hybrid search", spec: "rrf.test.ts" },
-  { id: "P2-06", week: 5, what: "Answers with [n] citations and \"I don't know\"", check: "npm run eval -- --answers" },
-  { id: "P2-07", week: 6, what: "Grow the golden set to 50 questions", check: "npm run eval" },
-  { id: "P2-09", week: 6, what: "LLM-as-judge, calibrated against your own labels", check: "npm run eval -- --answers" },
-  { id: "P2-10", week: 6, what: "Swap in a real document set", check: "corpus/ and the golden set rewritten" },
+  { id: "P2-01", week: 4, what: "Heading- and code-aware chunking", spec: "chunk.test.ts" },
+  { id: "P2-02", week: 4, what: "Vector search with pgvector", check: "npm run eval (vector row)" },
+  { id: "P2-03", week: 4, what: "recall@k and reciprocal rank", spec: "metrics.test.ts" },
+  { id: "P2-04", week: 4, what: "Voyage embeddings with batching and retries", check: "EMBEDDER=voyage npm run ingest, then npm run eval" },
+  { id: "P2-05", week: 5, what: "Keyword search with Postgres full-text search", check: "npm run eval (keyword row)" },
+  { id: "P2-06", week: 5, what: "Reciprocal Rank Fusion", spec: "rrf.test.ts" },
+  { id: "P2-07", week: 5, what: "Reranking with safe fallback", spec: "rerank.test.ts" },
+  { id: "P2-08", week: 5, what: "Grounded answers with [n] citations and abstention", check: "npm run ask, then npm run eval -- --answers" },
+  { id: "P2-09", week: 6, what: "Grow the golden set to 50 questions", check: "npm run eval" },
+  { id: "P2-10", week: 6, what: "LLM-as-judge calibrated against your labels", check: "npm run eval -- --answers, then npm run eval:calibrate" },
 ];
 
 function walk(dir) {

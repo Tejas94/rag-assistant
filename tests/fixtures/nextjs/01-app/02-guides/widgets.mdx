@@ -1,0 +1,60 @@
+---
+title: Widgets
+description: Add a widget to any page.
+---
+
+import { Widget } from '@/components/widget'
+export const meta = {
+  section: 'guides',
+}
+
+{/* Internal note: keep this page short. */}
+
+<AppOnly>
+
+Widgets render on the server by default. Wrap slow ones in `<Suspense>`.
+
+</AppOnly>
+
+<PagesOnly>
+
+In the Pages Router, load widget data with `getStaticProps`.
+
+</PagesOnly>
+
+<Image
+  alt="A widget on a dashboard"
+  srcLight="/docs/light/widget.png"
+  srcDark="/docs/dark/widget.png"
+  width="1600"
+  height="800"
+/>
+
+## Install
+
+```bash filename="Terminal"
+# add the package
+npm install widgets
+```
+
+## Usage
+
+```tsx filename="app/page.tsx" switcher
+import { Widget } from 'widgets'
+
+export default function Page() {
+  return <Widget size="small" />
+}
+```
+
+> **Good to know**: a widget adds less than 2 KB of JavaScript. Details at <https://example.com/widgets>.
+
+### Example
+
+Pass `size` as `"small"` or `"large"`.
+
+## Usage with forms
+
+### Example
+
+Read the current value with `useWidget()`.
