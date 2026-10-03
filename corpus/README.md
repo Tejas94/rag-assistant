@@ -1,8 +1,15 @@
-# Sample corpus
+# corpus/
 
-These five documents describe **Northwind Cloud**, a made-up hosting company, so the
-pipeline runs end to end on day one. They are small on purpose.
+`npm run docs:fetch` clones the docs for the current `DOCS_SOURCE` here, one folder per
+source:
 
-TODO(P2-10) Week 6: replace them with a real document set before you publish the project (see the
-main README). Good choices: a company's public docs you know well, UK legislation on
-one topic, a framework's documentation, or your own notes. Aim for 50-500 documents.
+- `corpus/nextjs/`: the `docs/` folder of vercel/next.js at tag v16.3.8 (the default).
+- `corpus/react-native/`: the released docs from facebook/react-native-website at a
+  pinned commit.
+
+The clones are gitignored. Never commit them: the docs belong to their authors, and
+anyone can fetch the same pinned version with one command. Each clone has a
+`.fetched.json` that records the ref, so `docs:fetch` only fetches again when the ref in
+`src/sources.ts` changes (or with `-- --force`).
+
+Set `CORPUS_DIR` to keep the clones somewhere else.

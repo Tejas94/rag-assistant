@@ -1,4 +1,18 @@
 node_modules
-.env
 *.tsbuildinfo
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Fetched docs (npm run docs:fetch); only the README is tracked
+corpus/*
+!corpus/README.md
+
+# Written by the eval runner. evals/report.md is committed; these are not.
 evals/results-*.json
+evals/answers-latest.jsonl
+
+# vitest output (json reporter)
+.vitest
