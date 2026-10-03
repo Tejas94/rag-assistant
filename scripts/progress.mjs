@@ -82,6 +82,9 @@ function specCell(t) {
   return r.total > 0 && r.passed === r.total ? `${label}, move it to tests/core` : label;
 }
 
+/** "Stream text" -> "stream text", but "MCP tools" and "LLM-as-judge" keep their capitals. */
+const lowerFirst = (s) => (/^[A-Z][a-z]/.test(s) ? s.charAt(0).toLowerCase() + s.slice(1) : s);
+
 const done = TODOS.filter((t) => !open.has(t.id));
 const next = TODOS.find((t) => open.has(t.id));
 const lines = [
@@ -93,6 +96,6 @@ const lines = [
   "| --- | --- | --- | --- | --- |",
   ...TODOS.map((t) => `| ${t.id} | ${t.week} | ${t.what} | ${open.has(t.id) ? "open" : "done"} | ${specCell(t)} |`),
   "",
-  next ? `Next up: **${next.id}**, ${next.what.charAt(0).toLowerCase()}${next.what.slice(1)}.` : "All TODOs done. Time to ship it.",
+  next ? `Next up: **${next.id}**, ${lowerFirst(next.what)}.` : "All TODOs done. Time to ship it.",
 ];
 console.log(lines.join("\n"));
